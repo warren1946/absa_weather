@@ -1,0 +1,40 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 28
+    useLibrary 'org.apache.http.legacy'
+
+    defaultConfig {
+        applicationId "app.simple.weather"
+        minSdkVersion 16
+        targetSdkVersion 28
+        versionCode 531
+        versionName "5.3"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig getSigningConfig()
+            applicationVariants.all { variant ->
+                variant.outputs.all {
+                    def appName = "Simple Weather"
+                    if (outputFileName != null && outputFileName.endsWith('.apk')) {
+                        outputFileName = appName + " " + defaultConfig.versionName + ".apk"
+                    }
+                }
+            }
+        }
+    }
+}
+
+dependencies {
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.browser:browser:1.2.0-alpha07'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'com.google.android.material:material:1.1.0-alpha10'
+    implementation 'com.google.android.ads.consent:consent-library:1.0.7'
+    implementation 'com.google.code.gson:gson:2.8.5'
+    implementation 'com.balysv:material-ripple:1.0.2'
+}
